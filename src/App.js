@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TextField, Typography, Button } from "@material-ui/core";
+import { TextField, Typography, AppBar, Toolbar } from "@material-ui/core";
 import "./App.css";
 
 const words = [
@@ -40,11 +40,11 @@ const words = [
   "write"
 ];
 
-function filterWord(word, column) {
-  if (column == "") {
+function filterWord(letter, column) {
+  if (column === "") {
     return true;
   }
-  return word.indexOf(column) !== -1;
+  return column.indexOf(letter) !== -1;
 }
 
 class App extends Component {
@@ -58,7 +58,13 @@ class App extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
-
+  getCandidates() {
+    let { candidates } = this.state;
+    if (candidates.length > 10) {
+      return <span>Candidates: 10+</span>;
+    }
+    return <span>Candidates: {candidates.join(" ")}</span>;
+  }
   handleChange(e) {
     let { column1, column2, column3 } = this.state;
     let candidates = words
@@ -67,41 +73,42 @@ class App extends Component {
       .filter(word => filterWord(word[2], column3));
 
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trim(),
       candidates: candidates
     });
   }
   render() {
     return (
       <div className="App">
-        <Typography variant="h4" color="inherit">
-          Password Cracker for "Keep Talking and Nobody Explodes"
-        </Typography>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h4" color="inherit">
+              KTANE Password Cracker{" "}
+              <span role="img" aria-label="bomb">
+                💣💥
+              </span>
+            </Typography>
+          </Toolbar>
+        </AppBar>
         <TextField
-          id="standard-multiline-static"
           label="Column 1"
-          margin="normal"
           name="column1"
           onChange={this.handleChange}
         />
         <br />
         <TextField
-          id="standard-multiline-static"
           label="Column 2"
-          margin="normal"
           name="column2"
           onChange={this.handleChange}
         />
         <br />
         <TextField
-          id="standard-multiline-static"
           label="Column 3"
-          margin="normal"
           name="column3"
           onChange={this.handleChange}
         />
         <br />
-        Results: {this.state.candidates.join(" ")}
+        {this.getCandidates()}
       </div>
     );
   }
