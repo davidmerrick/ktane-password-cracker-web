@@ -41,7 +41,7 @@ const words = [
 ];
 
 function filterWord(letter, column) {
-  if (column === "") {
+  if (column === "" || column === null) {
     return true;
   }
   return column.indexOf(letter) !== -1;
@@ -51,30 +51,29 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      column1: "",
-      column2: "",
-      column3: "",
-      candidates: words
+      column1: null,
+      column2: null,
+      column3: null
     };
     this.handleChange = this.handleChange.bind(this);
   }
   getCandidates() {
-    let { candidates } = this.state;
+    let candidates = this.filterCandidates();
     if (candidates.length > 10) {
       return <span>Candidates: 10+</span>;
     }
     return <span>Candidates: {candidates.join(" ")}</span>;
   }
-  handleChange(e) {
+  filterCandidates() {
     let { column1, column2, column3 } = this.state;
-    let candidates = words
+    return words
       .filter(word => filterWord(word[0], column1))
       .filter(word => filterWord(word[1], column2))
       .filter(word => filterWord(word[2], column3));
-
+  }
+  handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value.trim(),
-      candidates: candidates
+      [e.target.name]: e.target.value.trim()
     });
   }
   render() {
