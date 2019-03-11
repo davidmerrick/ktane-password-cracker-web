@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SerialNumber from "./components/SerialNumber";
 import PasswordCracker from "./components/PasswordCracker";
 import DescriptionCard from "./components/DescriptionCard";
 import { Typography, AppBar, Toolbar, Grid } from "@material-ui/core";
@@ -33,6 +34,9 @@ class App extends Component {
         <Grid container spacing={24}>
           <Grid item xs={12}>
             <DescriptionCard />
+          </Grid>
+          <Grid item xs={3}>
+            <SerialNumber />
           </Grid>
           <Grid item xs={3}>
             <PasswordCracker />
