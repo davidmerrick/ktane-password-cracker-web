@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SerialNumberField from "../fields/SerialNumberField";
 import {
   Typography,
   Card,
@@ -6,8 +7,6 @@ import {
   TextField,
   MenuItem
 } from "@material-ui/core";
-
-const SERIAL_MAX_LENGTH = 6;
 
 const batteries = [
   {
@@ -28,18 +27,17 @@ const batteries = [
   }
 ];
 
-class SerialNumber extends Component {
+class SerialNumberCard extends Component {
   constructor() {
     super();
     this.state = {
-      serial: null,
       batteriesCount: 0
     };
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value.trim()
+      [e.target.name]: e.target.value
     });
   }
   render() {
@@ -49,12 +47,7 @@ class SerialNumber extends Component {
           <Typography gutterBottom variant="h5" component="h2">
             Serial and Batteries
           </Typography>
-          <TextField
-            label="Serial"
-            name="serial"
-            inputProps={{ maxLength: SERIAL_MAX_LENGTH }}
-            onChange={this.handleChange}
-          />
+          <SerialNumberField />
           <br />
           <TextField
             select
@@ -76,4 +69,4 @@ class SerialNumber extends Component {
   }
 }
 
-export default SerialNumber;
+export default SerialNumberCard;

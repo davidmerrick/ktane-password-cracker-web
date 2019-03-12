@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import SerialNumber from "./components/SerialNumber";
-import PasswordCracker from "./components/PasswordCracker";
-import DescriptionCard from "./components/DescriptionCard";
+import SerialNumberCard from "./components/cards/SerialNumberCard";
+import PasswordCracker from "./components/cards/PasswordCrackerCard";
+import DescriptionCard from "./components/cards/DescriptionCard";
 import { Typography, AppBar, Toolbar, Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import "./App.css";
@@ -36,7 +36,7 @@ class App extends Component {
             <DescriptionCard />
           </Grid>
           <Grid item xs={3}>
-            <SerialNumber />
+            <SerialNumberCard />
           </Grid>
           <Grid item xs={3}>
             <PasswordCracker />
