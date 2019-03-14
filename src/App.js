@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SerialNumberCard from "./components/cards/SerialNumberCard";
 import PasswordCracker from "./components/cards/PasswordCrackerCard";
+import ComplicatedWiresCard from "./components/cards/ComplicatedWiresCard";
 import DescriptionCard from "./components/cards/DescriptionCard";
 import { Typography, AppBar, Toolbar, Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
@@ -40,6 +41,9 @@ class App extends Component {
           </Grid>
           <Grid item xs={3}>
             <PasswordCracker />
+          </Grid>
+          <Grid item xs={4}>
+            <ComplicatedWiresCard />
           </Grid>
         </Grid>
       </div>
