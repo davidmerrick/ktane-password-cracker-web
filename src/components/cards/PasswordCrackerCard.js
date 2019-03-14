@@ -52,7 +52,9 @@ class PasswordCracker extends Component {
     this.state = {
       column1: null,
       column2: null,
-      column3: null
+      column3: null,
+      column4: null,
+      column5: null
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -64,11 +66,13 @@ class PasswordCracker extends Component {
     return <span>Candidates: {candidates.join(" ")}</span>;
   }
   filterCandidates() {
-    let { column1, column2, column3 } = this.state;
+    let { column1, column2, column3, column4, column5 } = this.state;
     return words
       .filter(word => filterWord(word[0], column1))
       .filter(word => filterWord(word[1], column2))
-      .filter(word => filterWord(word[2], column3));
+      .filter(word => filterWord(word[2], column3))
+      .filter(word => filterWord(word[3], column4))
+      .filter(word => filterWord(word[4], column5));
   }
   handleChange(e) {
     this.setState({
@@ -100,6 +104,17 @@ class PasswordCracker extends Component {
             onChange={this.handleChange}
           />
           <br />
+          <TextField
+            label="Column 4"
+            name="column4"
+            onChange={this.handleChange}
+          />
+          <br />
+          <TextField
+            label="Column 5"
+            name="column5"
+            onChange={this.handleChange}
+          />
           <br />
           {this.getCandidates()}
         </CardContent>
