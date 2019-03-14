@@ -10,7 +10,7 @@ class ComplicatedWiresCard extends Component {
           <Typography gutterBottom variant="h5" component="h2">
             Complicated Wires
           </Typography>
-          <img src={wires} width="300px" />
+          <img src={wires} width="300px" alt="cheatsheet" />
         </CardContent>
       </Card>
     );

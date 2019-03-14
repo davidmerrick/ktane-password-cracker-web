@@ -72,7 +72,7 @@ class PasswordCracker extends Component {
   }
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value.trim()
+      [e.target.name]: e.target.value.trim().toLowerCase()
     });
   }
   render() {
