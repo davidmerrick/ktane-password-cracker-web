@@ -34,7 +34,8 @@ class SerialNumberCard extends Component {
   constructor() {
     super();
     this.state = {
-      batteriesCount: 0,
+      aaBatteries: 0,
+      dBatteries: 0,
       parallelPort: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -61,9 +62,9 @@ class SerialNumberCard extends Component {
           <FormGroup row>
             <TextField
               select
-              name="batteriesCount"
-              label="Batteries"
-              value={this.state.batteriesCount}
+              name="aaBatteries"
+              label="AA Batteries"
+              value={this.state.aaBatteries}
               onChange={this.handleChange}
               margin="normal"
             >
@@ -73,9 +74,24 @@ class SerialNumberCard extends Component {
                 </MenuItem>
               ))}
             </TextField>
-            <br />
-            <br />
-            <br />
+          </FormGroup>
+          <FormGroup row>
+            <TextField
+              select
+              name="dBatteries"
+              label="D Batteries"
+              value={this.state.dBatteries}
+              onChange={this.handleChange}
+              margin="normal"
+            >
+              {batteries.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </FormGroup>
+          <FormGroup row>
             <FormControlLabel
               control={
                 <Switch
