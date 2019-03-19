@@ -8,8 +8,19 @@ import {
   MenuItem,
   Switch,
   FormControlLabel,
-  FormGroup
+  FormGroup,
+  Button
 } from "@material-ui/core";
+import { connect } from "react-redux";
+import { simpleAction } from "../../actions/simpleAction";
+
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  simpleAction: () => dispatch(simpleAction())
+});
 
 const batteries = [
   {
@@ -31,15 +42,19 @@ const batteries = [
 ];
 
 class SerialNumberCard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       aaBatteries: 0,
       dBatteries: 0,
       parallelPort: false
     };
+    this.simpleAction = this.simpleAction.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleSwitch = this.toggleSwitch.bind(this);
+  }
+  simpleAction(e) {
+    this.props.simpleAction();
   }
   handleChange(e) {
     this.setState({
@@ -103,10 +118,16 @@ class SerialNumberCard extends Component {
               label="Parallel Port"
             />
           </FormGroup>
+          <FormGroup row>
+            <Button onClick={this.simpleAction}>Test Redux Action</Button>
+          </FormGroup>
         </CardContent>
       </Card>
     );
   }
 }
 
-export default SerialNumberCard;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SerialNumberCard);
