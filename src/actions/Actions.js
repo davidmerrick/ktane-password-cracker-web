@@ -13,7 +13,7 @@ export const updateAaBatteries = newCount => dispatch => {
   dispatch({
     type: types.UPDATE_AA_BATTERIES,
     payload: {
-      aaBatteriesCount: newCount
+      aaBatteries: newCount
     }
   });
 };
@@ -22,7 +22,16 @@ export const updateDBatteries = newCount => dispatch => {
   dispatch({
     type: types.UPDATE_D_BATTERIES,
     payload: {
-      dBatteriesCount: newCount
+      dBatteries: newCount
+    }
+  });
+};
+
+export const updateParallelPort = value => dispatch => {
+  dispatch({
+    type: types.UPDATE_PARALLEL_PORT,
+    payload: {
+      parallelPort: value
     }
   });
 };

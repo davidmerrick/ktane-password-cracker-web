@@ -10,6 +10,12 @@ import {
   FormControlLabel,
   FormGroup
 } from "@material-ui/core";
+import { connect } from "react-redux";
+import {
+  updateAaBatteries,
+  updateDBatteries,
+  updateParallelPort
+} from "../../actions/Actions";
 
 const batteries = [
   {
@@ -30,26 +36,31 @@ const batteries = [
   }
 ];
 
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateAaBatteries: newCount => dispatch(updateAaBatteries(newCount)),
+  updateDBatteries: newCount => dispatch(updateDBatteries(newCount)),
+  updateParallelPort: value => dispatch(updateParallelPort(value))
+});
+
 class SerialNumberCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      aaBatteries: 0,
-      dBatteries: 0,
-      parallelPort: false
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.toggleSwitch = this.toggleSwitch.bind(this);
+    this.updateAaBatteries = this.updateAaBatteries.bind(this);
+    this.updateDBatteries = this.updateDBatteries.bind(this);
+    this.updateParallelPort = this.updateParallelPort.bind(this);
   }
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  updateAaBatteries(e) {
+    this.props.updateAaBatteries(e.target.value);
   }
-  toggleSwitch(e) {
-    this.setState({
-      [e.target.name]: e.target.checked
-    });
+  updateDBatteries(e) {
+    this.props.updateDBatteries(e.target.value);
+  }
+  updateParallelPort(e) {
+    this.props.updateParallelPort(e.target.checked);
   }
   render() {
     return (
@@ -64,8 +75,8 @@ class SerialNumberCard extends Component {
               select
               name="aaBatteries"
               label="AA Batteries"
-              value={this.state.aaBatteries}
-              onChange={this.handleChange}
+              value={this.props.simpleReducer.aaBatteries}
+              onChange={this.updateAaBatteries}
               margin="normal"
             >
               {batteries.map(option => (
@@ -80,8 +91,8 @@ class SerialNumberCard extends Component {
               select
               name="dBatteries"
               label="D Batteries"
-              value={this.state.dBatteries}
-              onChange={this.handleChange}
+              value={this.props.simpleReducer.dBatteries}
+              onChange={this.updateDBatteries}
               margin="normal"
             >
               {batteries.map(option => (
@@ -95,8 +106,8 @@ class SerialNumberCard extends Component {
             <FormControlLabel
               control={
                 <Switch
-                  checked={this.state.parallelPort}
-                  onChange={this.toggleSwitch}
+                  checked={this.props.simpleReducer.parallelPort}
+                  onChange={this.updateParallelPort}
                   value="parallelPort"
                 />
               }
@@ -109,4 +120,7 @@ class SerialNumberCard extends Component {
   }
 }
 
-export default SerialNumberCard;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SerialNumberCard);
