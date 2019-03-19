@@ -31,8 +31,8 @@ const batteries = [
 ];
 
 class SerialNumberCard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       aaBatteries: 0,
       dBatteries: 0,

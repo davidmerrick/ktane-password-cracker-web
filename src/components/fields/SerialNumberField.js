@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import { TextField } from "@material-ui/core";
+import { connect } from "react-redux";
+import { updateSerial } from "../../actions/Actions";
 
 const SERIAL_MAX_LENGTH = 6;
 
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateSerial: newSerial => dispatch(updateSerial(newSerial))
+});
+
 class SerialNumberField extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      serial: null,
       helperText: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -19,9 +28,9 @@ class SerialNumberField extends Component {
       });
     } else {
       this.setState({
-        helperText: "",
-        [e.target.name]: e.target.value.trim()
+        helperText: ""
       });
+      this.props.updateSerial(e.target.value.trim());
     }
   }
   render() {
@@ -29,6 +38,7 @@ class SerialNumberField extends Component {
       <TextField
         label="Serial"
         name="serial"
+        value={this.props.simpleReducer.serialNumber}
         helperText={this.state.helperText}
         error={this.state.helperText !== ""}
         inputProps={{ maxLength: SERIAL_MAX_LENGTH }}
@@ -38,4 +48,7 @@ class SerialNumberField extends Component {
   }
 }
 
-export default SerialNumberField;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SerialNumberField);
