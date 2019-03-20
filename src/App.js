@@ -34,19 +34,19 @@ class App extends Component {
           </Toolbar>
         </AppBar>
         <Grid container spacing={24}>
-          <Grid item xs={12}>
+          <Grid item sm={12}>
             <DescriptionCard />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item sm={12} md={3}>
             <SerialNumberCard />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item sm={12} md={3}>
             <PasswordCracker />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item sm={12} md={3}>
             <ComplicatedWiresCard />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item sm={12} md={3}>
             <SimpleWiresCard />
           </Grid>
         </Grid>
