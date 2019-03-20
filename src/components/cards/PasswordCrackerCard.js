@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { TextField, Typography, Card, CardContent } from "@material-ui/core";
+import {
+  TextField,
+  Typography,
+  Card,
+  CardContent,
+  FormGroup
+} from "@material-ui/core";
 
 const words = [
   "about",
@@ -86,36 +92,41 @@ class PasswordCracker extends Component {
           <Typography gutterBottom variant="h5" component="h2">
             Password
           </Typography>
-          <TextField
-            label="Column 1"
-            name="column1"
-            onChange={this.handleChange}
-          />
-          <br />
-          <TextField
-            label="Column 2"
-            name="column2"
-            onChange={this.handleChange}
-          />
-          <br />
-          <TextField
-            label="Column 3"
-            name="column3"
-            onChange={this.handleChange}
-          />
-          <br />
-          <TextField
-            label="Column 4"
-            name="column4"
-            onChange={this.handleChange}
-          />
-          <br />
-          <TextField
-            label="Column 5"
-            name="column5"
-            onChange={this.handleChange}
-          />
-          <br />
+          <FormGroup row>
+            <TextField
+              label="Column 1"
+              name="column1"
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup row>
+            <TextField
+              label="Column 2"
+              name="column2"
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup row>
+            <TextField
+              label="Column 3"
+              name="column3"
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup row>
+            <TextField
+              label="Column 4"
+              name="column4"
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup row>
+            <TextField
+              label="Column 5"
+              name="column5"
+              onChange={this.handleChange}
+            />
+          </FormGroup>
           {this.getCandidates()}
         </CardContent>
       </Card>

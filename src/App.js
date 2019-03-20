@@ -6,6 +6,7 @@ import DescriptionCard from "./components/cards/DescriptionCard";
 import { Typography, AppBar, Toolbar, Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import "./App.css";
+import SimpleWiresCard from "./components/cards/SimpleWiresCard";
 
 const styles = theme => ({
   root: {
@@ -36,14 +37,17 @@ class App extends Component {
           <Grid item xs={12}>
             <DescriptionCard />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <SerialNumberCard />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <PasswordCracker />
           </Grid>
           <Grid item xs={4}>
             <ComplicatedWiresCard />
+          </Grid>
+          <Grid item xs={4}>
+            <SimpleWiresCard />
           </Grid>
         </Grid>
       </div>
