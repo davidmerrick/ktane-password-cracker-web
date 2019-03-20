@@ -1,6 +1,8 @@
 export const WIRE_WHITE = "WIRE_WHITE";
 export const WIRE_RED_WHITE_STRIPES = "WIRE_RED_WHITE_STRIPES";
 export const WIRE_RED = "WIRE_RED";
+export const WIRE_YELLOW = "WIRE_YELLOW";
+export const WIRE_BLACK = "WIRE_BLACK";
 export const WIRE_BLUE = "WIRE_BLUE";
 export const WIRE_BLUE_WHITE_STRIPES = "WIRE_BLUE_WHITE_STRIPES";
 export const WIRE_RED_BLUE_STRIPES = "WIRE_RED_BLUE_STRIPES";
