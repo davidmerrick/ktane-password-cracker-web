@@ -31,7 +31,7 @@ import {
 } from "@material-ui/core";
 import { SERIAL_MAX_LENGTH } from "../../models/SerialNumber";
 import { connect } from "react-redux";
-import { green, red, blue, amber } from "@material-ui/core/colors";
+import { green, red, amber } from "@material-ui/core/colors";
 import { withStyles } from "@material-ui/core/styles";
 import Done from "@material-ui/icons/Done";
 import Block from "@material-ui/icons/Block";
