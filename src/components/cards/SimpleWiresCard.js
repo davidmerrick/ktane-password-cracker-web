@@ -9,6 +9,7 @@ import {
   MenuItem
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import DeleteIcon from "@material-ui/icons/Delete";
 import {
   WIRE_WHITE,
   WIRE_BLUE,
@@ -46,14 +47,18 @@ const mapStateToProps = state => ({
 });
 
 const MAX_WIRES = 5;
+const MIN_WIRES = 3;
+const INITIAL_WIRES = [WIRE_WHITE, WIRE_WHITE, WIRE_WHITE];
 
 class SimpleWiresCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wires: []
+      wires: INITIAL_WIRES
     };
     this.addWire = this.addWire.bind(this);
+    this.removeWire = this.removeWire.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
   addWire() {
     const { wires } = this.state;
@@ -66,15 +71,34 @@ class SimpleWiresCard extends Component {
       wires: wires
     });
   }
+  removeWire() {
+    const { wires } = this.state;
+    if (wires.length == MIN_WIRES) {
+      console.error(`Error, no less than ${MIN_WIRES} wires are allowed.`);
+      return;
+    }
+    wires.pop();
+    this.setState({
+      wires: wires
+    });
+  }
+  handleSelect(e) {
+    const { wires } = this.state;
+    wires[e.target.name] = e.target.value;
+    this.setState({
+      wires: wires
+    });
+  }
   renderWires() {
+    let handleSelect = this.handleSelect;
     return this.state.wires.map((wire, index) => (
-      <FormGroup row>
+      <FormGroup key={index} row>
         <TextField
           select
           name={index.toString()}
           label="Wire Color"
           value={wire}
-          onChange={this.handleSelect}
+          onChange={handleSelect}
           margin="normal"
         >
           {wireColors.map(option => (
@@ -103,6 +127,15 @@ class SimpleWiresCard extends Component {
           >
             <AddIcon />
             Add a wire
+          </Fab>
+          <Fab
+            variant="extended"
+            aria-label="Remove"
+            size="medium"
+            onClick={this.removeWire}
+          >
+            <DeleteIcon />
+            Remove a wire
           </Fab>
         </CardContent>
       </Card>
