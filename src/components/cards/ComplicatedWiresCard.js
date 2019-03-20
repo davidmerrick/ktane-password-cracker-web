@@ -6,7 +6,9 @@ import {
   WIRE_BLUE,
   WIRE_BLUE_WHITE_STRIPES,
   WIRE_RED_WHITE_STRIPES,
-  WIRE_RED,
+  WIRE_RED
+} from "../../models/WireColors";
+import {
   STAR,
   NO_STAR,
   LED_ON,
@@ -16,25 +18,28 @@ import {
   BATT_CUT,
   PORT_CUT,
   SERIAL_CUT
-} from "./ComplicatedWiresColors";
+} from "../../models/ComplicatedWires";
 import ComplicatedWiresMap from "./ComplicatedWiresMap";
 import {
+  Avatar,
   FormGroup,
   FormControlLabel,
   Switch,
   MenuItem,
   TextField,
-  Chip,
-  Divider
+  Chip
 } from "@material-ui/core";
+import { SERIAL_MAX_LENGTH } from "../../models/SerialNumber";
 import { connect } from "react-redux";
+import { green, red, blue, amber } from "@material-ui/core/colors";
+import { withStyles } from "@material-ui/core/styles";
+import Done from "@material-ui/icons/Done";
+import Block from "@material-ui/icons/Block";
 
 const mapStateToProps = state => ({
   ...state
 });
 
-// Todo: Add a verification icon, based on the store state.
-// i.e. if serial number is even and we calculated that, put the verify checkmark in the chip
 const wireColors = [
   {
     value: WIRE_WHITE,
@@ -61,6 +66,18 @@ const wireColors = [
     label: "Red, blue stripes"
   }
 ];
+
+const styles = theme => ({
+  cut: {
+    backgroundColor: green[600]
+  },
+  noCut: {
+    backgroundColor: red[600]
+  },
+  maybeCut: {
+    backgroundColor: amber[600]
+  }
+});
 
 class ComplicatedWiresCard extends Component {
   constructor(props) {
@@ -90,8 +107,8 @@ class ComplicatedWiresCard extends Component {
       .get(led)
       .get(star);
   }
-  getCutMessage() {
-    switch (this.getResult()) {
+  getCutMessage(result) {
+    switch (result) {
       case CUT:
         return "Cut";
       case NO_CUT:
@@ -106,23 +123,60 @@ class ComplicatedWiresCard extends Component {
         return "Error";
     }
   }
-  getChipColor() {
-    switch (this.getResult()) {
+  getChipColor(result) {
+    const { classes } = this.props;
+    switch (result) {
       case CUT:
-        return "primary";
+        return classes.cut;
       case NO_CUT:
-        return "secondary";
+        return classes.noCut;
       case BATT_CUT:
-        return "primary";
       case PORT_CUT:
-        return "primary";
       case SERIAL_CUT:
-        return "primary";
+        return classes.maybeCut;
       default:
         return "default";
     }
   }
+  getChipIcon(result) {
+    let chipColor = this.getChipColor(result);
+    let icon;
+    switch (result) {
+      case CUT:
+        icon = <Done />;
+        break;
+      case NO_CUT:
+        icon = <Block />;
+        break;
+      case BATT_CUT:
+        let { aaBatteries, dBatteries } = this.props.simpleReducer;
+        let batteriesCount = aaBatteries + dBatteries;
+        icon = batteriesCount >= 2 ? <Done /> : <Block />;
+        break;
+      case PORT_CUT:
+        let { parallelPort } = this.props.simpleReducer;
+        icon = parallelPort ? <Done /> : <Block />;
+        break;
+      case SERIAL_CUT:
+        let { serialNumber } = this.props.simpleReducer;
+        if (
+          serialNumber &&
+          serialNumber.length === SERIAL_MAX_LENGTH &&
+          serialNumber[serialNumber.length - 1] % 2 === 0
+        ) {
+          icon = <Done />;
+        } else {
+          icon = <Block />;
+        }
+        break;
+      default:
+        icon = "";
+        break;
+    }
+    return <Avatar className={chipColor}>{icon}</Avatar>;
+  }
   render() {
+    let result = this.getResult();
     return (
       <Card>
         <CardContent>
@@ -169,12 +223,19 @@ class ComplicatedWiresCard extends Component {
               label="Star"
             />
           </FormGroup>
-          <Divider variant="middle" />
-          <Chip label={this.getCutMessage()} color={this.getChipColor()} />
+          <FormGroup row>
+            <Chip
+              avatar={this.getChipIcon(result)}
+              label={this.getCutMessage(result)}
+              className={this.getChipColor(result)}
+            />
+          </FormGroup>
         </CardContent>
       </Card>
     );
   }
 }
 
-export default connect(mapStateToProps)(ComplicatedWiresCard);
+export default connect(mapStateToProps)(
+  withStyles(styles)(ComplicatedWiresCard)
+);

@@ -4,7 +4,8 @@ import {
   Typography,
   Card,
   CardContent,
-  FormGroup
+  FormGroup,
+  Chip
 } from "@material-ui/core";
 
 const words = [
@@ -127,7 +128,9 @@ class PasswordCracker extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
-          {this.getCandidates()}
+          <FormGroup row>
+            <Chip label={this.getCandidates()} />
+          </FormGroup>
         </CardContent>
       </Card>
     );

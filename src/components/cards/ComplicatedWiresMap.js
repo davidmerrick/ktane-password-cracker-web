@@ -4,17 +4,19 @@ import {
   WIRE_BLUE,
   WIRE_BLUE_WHITE_STRIPES,
   WIRE_RED_WHITE_STRIPES,
-  WIRE_RED,
-  LED_OFF,
+  WIRE_RED
+} from "../../models/WireColors";
+import {
   STAR,
-  CUT,
   NO_STAR,
   LED_ON,
+  LED_OFF,
+  CUT,
   NO_CUT,
   BATT_CUT,
-  SERIAL_CUT,
-  PORT_CUT
-} from "./ComplicatedWiresColors";
+  PORT_CUT,
+  SERIAL_CUT
+} from "../../models/ComplicatedWires";
 
 const whiteWireMap = new Map([
   [LED_OFF, new Map([[NO_STAR, CUT], [STAR, CUT]])],

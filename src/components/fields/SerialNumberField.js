@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { TextField } from "@material-ui/core";
 import { connect } from "react-redux";
 import { updateSerial } from "../../actions/Actions";
-
-const SERIAL_MAX_LENGTH = 6;
+import { SERIAL_MAX_LENGTH } from "../../models/SerialNumber";
 
 const mapStateToProps = state => ({
   ...state
