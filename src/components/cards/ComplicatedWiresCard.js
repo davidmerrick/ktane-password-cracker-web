@@ -23,7 +23,9 @@ import {
   FormControlLabel,
   Switch,
   MenuItem,
-  TextField
+  TextField,
+  Chip,
+  Divider
 } from "@material-ui/core";
 import { connect } from "react-redux";
 
@@ -31,6 +33,8 @@ const mapStateToProps = state => ({
   ...state
 });
 
+// Todo: Add a verification icon, based on the store state.
+// i.e. if serial number is even and we calculated that, put the verify checkmark in the chip
 const wireColors = [
   {
     value: WIRE_WHITE,
@@ -102,6 +106,22 @@ class ComplicatedWiresCard extends Component {
         return "Error";
     }
   }
+  getChipColor() {
+    switch (this.getResult()) {
+      case CUT:
+        return "primary";
+      case NO_CUT:
+        return "secondary";
+      case BATT_CUT:
+        return "primary";
+      case PORT_CUT:
+        return "primary";
+      case SERIAL_CUT:
+        return "primary";
+      default:
+        return "default";
+    }
+  }
   render() {
     return (
       <Card>
@@ -149,7 +169,8 @@ class ComplicatedWiresCard extends Component {
               label="Star"
             />
           </FormGroup>
-          {this.getCutMessage()}
+          <Divider variant="middle" />
+          <Chip label={this.getCutMessage()} color={this.getChipColor()} />
         </CardContent>
       </Card>
     );
