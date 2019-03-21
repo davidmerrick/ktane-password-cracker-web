@@ -73,7 +73,7 @@ class SimpleWiresCard extends Component {
   }
   removeWire() {
     const { wires } = this.state;
-    if (wires.length == MIN_WIRES) {
+    if (wires.length === MIN_WIRES) {
       console.error(`Error, no less than ${MIN_WIRES} wires are allowed.`);
       return;
     }
