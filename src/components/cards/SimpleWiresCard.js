@@ -124,6 +124,10 @@ class SimpleWiresCard extends Component {
       return "Cut the last wire.";
     }
   }
+  countWires(wireColor){
+    const { wires } = this.state;
+    return wires.reduce((pre, cur) => (cur.indexOf(wireColor) !== -1) ? ++pre : pre, 0);
+  }
   solveFourWires(){
     const { wires } = this.state;
     if (wires.filter(wire => wire.indexOf(WIRE_RED) !== -1).length > 1) {
@@ -142,7 +146,7 @@ class SimpleWiresCard extends Component {
     const { wires } = this.state;
     if (wires[wires.length - 1].indexOf(WIRE_BLACK) !== -1) {
       return "If the last digit of the serial number is odd, cut the fourth wire.";
-    } else if(wires.filter(wire => wire.indexOf(WIRE_RED) !== -1).length === 1 && wires.filter(wire => wire.indexOf(WIRE_YELLOW).length > 1)){
+    } else if(this.countWires(WIRE_RED) === 1 && this.countWires(WIRE_YELLOW) > 1){
       return "Cut the first wire.";
     } else if(wires.indexOf(WIRE_BLACK) === -1) {
       return "Cut the second wire.";
@@ -154,7 +158,7 @@ class SimpleWiresCard extends Component {
     const { wires } = this.state;
     if (wires.indexOf(WIRE_YELLOW) === -1) {
       return "If the last digit of the serial number is odd, cut the third wire.";
-    } else if(wires.filter(wire => wire.indexOf(WIRE_YELLOW) !== -1).length === 1 && wires.filter(wire => wire.indexOf(WIRE_WHITE).length > 1)) {
+    } else if(this.countWires(WIRE_YELLOW) === 1 && this.countWires(WIRE_WHITE) > 1) {
       return "Cut the fourth wire.";
     } else if (wires.indexOf(WIRE_RED) === -1) {
       return "Cut the last wire.";
