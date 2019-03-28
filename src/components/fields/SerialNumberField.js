@@ -37,7 +37,7 @@ class SerialNumberField extends Component {
       <TextField
         label="Serial"
         name="serial"
-        value={this.props.simpleReducer.serialNumber}
+        value={this.props.serialNumberReducer.serialNumber}
         helperText={this.state.helperText}
         error={this.state.helperText !== ""}
         inputProps={{ maxLength: SERIAL_MAX_LENGTH }}

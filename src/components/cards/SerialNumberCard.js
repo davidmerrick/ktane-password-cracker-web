@@ -75,7 +75,7 @@ class SerialNumberCard extends Component {
               select
               name="aaBatteries"
               label="AA Batteries"
-              value={this.props.simpleReducer.aaBatteries}
+              value={this.props.serialNumberReducer.aaBatteries}
               onChange={this.updateAaBatteries}
               margin="normal"
             >
@@ -91,7 +91,7 @@ class SerialNumberCard extends Component {
               select
               name="dBatteries"
               label="D Batteries"
-              value={this.props.simpleReducer.dBatteries}
+              value={this.props.serialNumberReducer.dBatteries}
               onChange={this.updateDBatteries}
               margin="normal"
             >
@@ -106,7 +106,7 @@ class SerialNumberCard extends Component {
             <FormControlLabel
               control={
                 <Switch
-                  checked={this.props.simpleReducer.parallelPort}
+                  checked={this.props.serialNumberReducer.parallelPort}
                   onChange={this.updateParallelPort}
                   value="parallelPort"
                 />

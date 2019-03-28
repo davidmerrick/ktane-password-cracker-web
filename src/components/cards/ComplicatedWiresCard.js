@@ -149,16 +149,16 @@ class ComplicatedWiresCard extends Component {
         icon = <Block />;
         break;
       case BATT_CUT:
-        let { aaBatteries, dBatteries } = this.props.simpleReducer;
+        let { aaBatteries, dBatteries } = this.props.serialNumberReducer;
         let batteriesCount = aaBatteries + dBatteries;
         icon = batteriesCount >= 2 ? <Done /> : <Block />;
         break;
       case PORT_CUT:
-        let { parallelPort } = this.props.simpleReducer;
+        let { parallelPort } = this.props.serialNumberReducer;
         icon = parallelPort ? <Done /> : <Block />;
         break;
       case SERIAL_CUT:
-        let { serialNumber } = this.props.simpleReducer;
+        let { serialNumber } = this.props.serialNumberReducer;
         if (
           serialNumber &&
           serialNumber.length === SERIAL_MAX_LENGTH &&
