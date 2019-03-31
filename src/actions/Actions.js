@@ -35,3 +35,14 @@ export const updateParallelPort = value => dispatch => {
     }
   });
 };
+
+export const updateStrikes = value => dispatch => {
+  if (value >= 0 && value <= 3) {
+    dispatch({
+      type: types.UPDATE_STRIKES,
+      payload: {
+        strikes: value
+      }
+    });
+  }
+};

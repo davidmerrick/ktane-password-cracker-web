@@ -33,20 +33,22 @@ class App extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Grid container spacing={24}>
+        <Grid container spacing={24} justify="center">
           <Grid item sm={12}>
             <DescriptionCard />
           </Grid>
-          <Grid item sm={12} md={3}>
+          <Grid item sm={12} md={4}>
             <SerialNumberCard />
           </Grid>
-          <Grid item sm={12} md={3}>
+          <Grid item sm={12} md={4}>
             <PasswordCracker />
           </Grid>
-          <Grid item sm={12} md={3}>
+        </Grid>
+        <Grid container spacing={24} justify="center">
+          <Grid item sm={12} md={4}>
             <ComplicatedWiresCard />
           </Grid>
-          <Grid item sm={12} md={3}>
+          <Grid item sm={12} md={4}>
             <SimpleWiresCard />
           </Grid>
         </Grid>

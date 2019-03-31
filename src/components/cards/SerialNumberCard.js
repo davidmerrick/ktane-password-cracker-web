@@ -14,7 +14,8 @@ import { connect } from "react-redux";
 import {
   updateAaBatteries,
   updateDBatteries,
-  updateParallelPort
+  updateParallelPort,
+  updateStrikes
 } from "../../actions/Actions";
 
 const batteries = [
@@ -43,7 +44,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateAaBatteries: newCount => dispatch(updateAaBatteries(newCount)),
   updateDBatteries: newCount => dispatch(updateDBatteries(newCount)),
-  updateParallelPort: value => dispatch(updateParallelPort(value))
+  updateParallelPort: value => dispatch(updateParallelPort(value)),
+  updateStrikes: value => dispatch(updateStrikes(value))
 });
 
 class SerialNumberCard extends Component {
@@ -52,6 +54,7 @@ class SerialNumberCard extends Component {
     this.updateAaBatteries = this.updateAaBatteries.bind(this);
     this.updateDBatteries = this.updateDBatteries.bind(this);
     this.updateParallelPort = this.updateParallelPort.bind(this);
+    this.updateStrikes = this.updateStrikes.bind(this);
   }
   updateAaBatteries(e) {
     this.props.updateAaBatteries(e.target.value);
@@ -62,12 +65,15 @@ class SerialNumberCard extends Component {
   updateParallelPort(e) {
     this.props.updateParallelPort(e.target.checked);
   }
+  updateStrikes(e) {
+    this.props.updateStrikes(e.target.value);
+  }
   render() {
     return (
       <Card>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Serial and Batteries
+            Serial, Batteries, Ports, and Strikes
           </Typography>
           <SerialNumberField />
           <FormGroup row>
@@ -112,6 +118,14 @@ class SerialNumberCard extends Component {
                 />
               }
               label="Parallel Port"
+            />
+          </FormGroup>
+          <FormGroup row>
+            <TextField
+              label="Strikes"
+              onChange={this.updateStrikes}
+              value={this.props.serialNumberReducer.strikes}
+              type="number"
             />
           </FormGroup>
         </CardContent>

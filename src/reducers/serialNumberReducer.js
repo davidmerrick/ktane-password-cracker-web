@@ -4,7 +4,8 @@ const initialState = {
   serialNumber: "",
   aaBatteries: 0,
   dBatteries: 0,
-  parallelPort: false
+  parallelPort: false,
+  strikes: 0
 };
 
 const simpleReducer = (state = initialState, action) => {
@@ -24,6 +25,10 @@ const simpleReducer = (state = initialState, action) => {
     case types.UPDATE_PARALLEL_PORT:
       return Object.assign({}, state, {
         parallelPort: action.payload.parallelPort
+      });
+    case types.UPDATE_STRIKES:
+      return Object.assign({}, state, {
+        strikes: action.payload.strikes
       });
     default:
       return state;
